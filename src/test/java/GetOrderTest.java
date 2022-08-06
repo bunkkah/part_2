@@ -2,14 +2,10 @@ import client.ApiClient;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import model.CreateUser;
-import model.IngredientsResponse;
-import model.OrderRequest;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 
@@ -25,9 +21,6 @@ public class GetOrderTest {
         createUser = CreateUser.getRandomUser();
         ValidatableResponse response = apiClient.createUser(createUser);
         accessToken = response.extract().path("accessToken");
-        IngredientsResponse ingredientsResponse = apiClient.getIngredients();
-        List<String> listOfIngredients = (ingredientsResponse.filterIdByName("Биокотлета из марсианской Магнолии", "Говяжий метеорит (отбивная)"));
-        ValidatableResponse responseCreate = apiClient.createOrderWithAuthorization(accessToken, new OrderRequest(new String[]{listOfIngredients.get(0), listOfIngredients.get(1)}));
 
     }
 
